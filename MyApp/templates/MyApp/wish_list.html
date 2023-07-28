@@ -1,0 +1,318 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+
+         <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+        
+
+<style type="text/css">
+ 
+</style>
+</head>
+    <body style="background-color: ;margin-top: 1cm;">
+
+  {% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong style="color: white;font-weight: bold;">{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+
+
+ 
+
+
+<div class="container-fluid" style="margin-top: 1cm;">
+
+
+
+
+
+
+<div class="row" style="padding: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row--------->
+  
+<div class="col-md-6" style="display: flex;"><!---mwanzo wa column--------->
+
+  <img src="{% static 'MyApp/assets/img/me.jpg' %}" class="rounded-circle" style="width: 50px;height: 50px;"> 
+
+  <h3 style="color: blue;font-size: 18px;margin-left: 15px;font-weight: bold;"><span style="color: black;">  D-Trader</span><br>
+ www.D-Trader.com</h3>
+</div><!---mwisho wa column--------->
+
+
+</div><!---mwisho wa row--------->
+
+
+
+<!---MWANZO WA KUDISPLAY PRODUCTS--------------------------------->
+
+{% if order.items.all %}
+{% for x in order.items.all %}
+<div class="row" style="padding: 10px;margin-bottom: 30px; box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row--------->
+  
+<div class="col-md-4" ><!---mwanzo wa column--------->
+
+{% if x.item.image %}
+<center>
+  <img src="{{x.item.image.url}}" class="product-image" style="width: 60%;height:180px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"> 
+</center>
+{% else %}
+<center>
+  <img src="{% static 'MyApp/assets/img/sample.jpeg' %}" class="product-image" style="width: 80%;height:300px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"> 
+</center>
+
+{% endif %}
+
+<div style="display: flex;">
+  
+
+  <h3 style="color: black;font-size: 23px;margin-top: 30px;margin-left: 30px;">{{x.item.ProductName}}<br>
+ <span style="color: red;font-size: 18px;"> {{x.item.ProductStatus}}</span></h3></div>
+
+
+
+</div><!---mwisho wa column--------->
+
+
+<div class="col-md-4" style="box-shadow: 1px 1px  1px 1px rgba(0,0,0,0.1)"><!---mwanzo wa column--------->
+
+
+
+<div class="row"><!--mwamzo wa row---->
+
+
+  <div class="col-md-6"><!--mwamzo wa column---->
+
+    <span>Case Package</span><br>
+
+    <span style="font-weight: bold;">{{x.item.ProductPackage}}</span><br>
+
+<span>Number of Products</span><br>
+
+<span style="font-weight: bold;">{{x.item.ProductQuantity}}</span><br>
+
+{% if x.item.ProductArchitecture %}
+<span>Core Architecture</span><br>
+
+<span style="font-weight: bold;">{{x.item.ProductArchitecture}}</span><br>
+{% endif %}
+
+
+{% if x.item.MemoryType %}
+<span>Memory Type</span><br>
+
+<span style="font-weight: bold;">{{x.item.MemoryType}}</span><br>
+{% endif %}
+
+
+
+
+ {% if x.item.MemorySize %}
+<span>Memory Size</span><br>
+
+<span style="font-weight: bold;">{{x.item.MemorySize}}</span><br>
+{% endif %}
+    
+  </div><!--mwisho wa column---->
+
+
+  <div class="col-md-6"><!--mwamzo wa column---->
+
+  
+
+{% if x.item.MaxFrequency %}
+<span>Maxmum Frequency</span><br>
+
+<span style="font-weight: bold;">{{x.item.MaxFrequency}}</span><br>
+{% endif %}
+
+
+{% if x.item.Peripherals %}
+<span>Peripherals</span><br>
+
+<span style="font-weight: bold;">{{x.item.Peripherals}}</span><br>
+{% endif %}
+
+
+{% if x.item.MaxSupplyVoltage %}
+<span>Maximum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{x.item.MaxSupplyVoltage}}</span><br>
+{% endif %}
+
+
+{% if x.item.MinSupplyVoltage %}
+<span>Minimum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{x.item.MinSupplyVoltage}}</span><br>
+{% endif %}
+
+{% if x.item.AuthorizedDistributers %}
+<span>Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{x.item.AuthorizedDistributers}}</span><br>
+{% endif %}
+
+    
+  </div><!--mwisho wa column---->
+  
+</div><!--mwisho wa row---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!---mwisho wa column--------->
+
+
+
+<div class="col-md-4" style="margin-top: 20px;"><!---mwanzo wa column--------->
+
+<div style="display: flex;">
+{% if x.item.ProductDiscountPrice %}
+<h3 style="margin-top: 10px;font-size: 17px;font-weight: bold;"><strike>Tsh {{x.item.ProductPrice}}/=</strike>
+<span style="margin-top: 10px;">Tsh {{x.item.ProductDiscountPrice}}/=</span></h3>
+{% else %}
+<span style="margin-top: 10px;">Tsh {{x.item.ProductPrice}}/=</span>
+{% endif %}
+
+
+
+
+
+
+</div>
+
+  </div><!---mwisho wa column--------->
+
+
+</div><!---mwisho wa row--------->
+
+{% endfor %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% include "MyApp/final_description.html" %}
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'MyApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'MyApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+   <script >
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskel",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      
+
+    ];
+
+   $( "#search" ). autocomplete({
+    source: "{% url 'search_product_autocomplete' %}",
+  });
+
+
+  } );
+  
+  
+
+</script>
+
+ </body>
+</html>
+
+
+{% endblock content %}
+  
+ 

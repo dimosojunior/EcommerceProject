@@ -1,0 +1,402 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+       
+
+    
+
+         <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+
+ 
+
+
+    
+<style type="text/css">
+	
+
+
+
+
+
+
+
+</style>
+
+
+</head>
+<body>
+
+
+
+
+
+
+<div class="container-fluid" style="margin-bottom: 50px;margin-top: 70px;"><!--mwanzo wa container--->
+	
+
+
+
+
+
+
+<!------------------view details page----------------------------------------->
+
+
+ <center>
+  <div class="row view-page1" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row----->
+   
+<h1 style="color: blue;font-weight: bold;font-size: 22px;">Dimoso-Electronics-Center</h1>
+      <div class="col-md-2"><!---mwanzo wa column----->
+     <img src="{% static 'MyApp/assets/img/me.jpg' %}" class="rounded-circle" style="width: 80px;height: 80px;">     
+      </div><!---mwisho wa column----->
+
+
+   <div class="col-md-8" style="margin-top: 15px;"><!---mwanzo wa column----->   
+      
+
+    <p style="float: left;text-align: left;">
+      Dimoso Electronics Center ni mkusanyiko wa bidhaa zote za aina mbalimbali kama vile vifaa vya umeme, simu za mkononi, vifaa vya majumbani, kompyuta mpakato na vifaa vyote unavyovijua.
+
+       
+
+      <!-- <button class="btn-primary upload-me" style="margin-top:10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 20px;margin-right: 5px;background-color: ;"></i> </button>   -->
+      </p>
+
+
+
+</div><!---mwisho wa column----->
+
+  
+    
+  </div><!---mwisho wa row------------------------------------>
+  </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------EXPLORE CATEGORIES-------------------->
+
+
+
+
+<!---ROW YA CATEGORY---->
+
+<center>
+<div class="row category-section"><!--mwanzo wa row--->
+  {% if products %}
+<center><h1 style="font-size: 25px;color: black;font-weight: bold;margin-top: 1cm;">Gown </h1></center>
+
+
+{% for x in products %}
+<div class="col-md-3 column" style="margin-bottom: 15px;"><!--mwanzo wa column--->
+   <!---mwanzo wa card--->
+<div class="card text-center" style="border-radius: 5px;">
+  
+  <div class="card-body">
+
+  {% if x.image %}
+
+   <a href="{% url 'view_product' x.pk %}"><img src="{{x.image.url}}" style="width: 60%;height:150px; "></a> <br>
+      {% else %}
+      <img src="{% static 'MyApp/assets/img/sample.jpeg' %}"  style="width: 60%;height:150px; "> 
+
+{% endif %}
+      <span style="color: black;font-weight: bold;">{{x.ProductName}}</span>
+    
+  </div>
+  
+</div>
+
+
+<!---mwisho wa card---->
+</div><!--mwisho wa column--->
+
+{% endfor %}
+{% else %}
+No Products
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+<!------SIMILAR PARTS------------------------------->
+
+
+
+
+
+
+<center>
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3);padding: 15px;"><!--mwanzo wa row--->
+
+
+
+<div class="col-md-12" style="float: left;text-align: left;"><!--mwanzo wa column--->
+
+<span style="font-weight: bold;font-size: 20px;">Parts with similar Specs</span>
+
+
+  <p>The following parts have similar specifications.
+    
+    
+  </p>
+
+
+
+
+  
+</div><!--mwisho wa column--->
+
+
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+<!----------------------------HIZO PARTS ZENYEWE------------------------->
+
+<center>
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3);padding: 15px;"><!--mwanzo wa row--->
+
+
+
+<!-------other parts--------------------------->
+
+<div class="col-md-12" style="float: left;text-align: left;"><!--mwanzo wa column--->
+ 
+<div class="row"><!----mwanzo wa row----->
+  <center><span style="color: black;font-weight: bold;">Similar Parts</span></center>
+
+
+{% if similar_products %}
+{% for product in similar_products %}
+<div class="col-md-3" style="margin-top: 10px;"><!----mwanzo wa column----->
+ 
+<img src="{{product.image.url}}" style="width: 150px;height:margin-top: 10px;"><br>
+
+<span style="font-weight: bold;">{{product.ProductName}}
+</span><br>
+
+
+ {% if product.ProductDiscountPrice %}
+      <span>Price @ {{product.ProductDiscountPrice}}</span><br>
+      {% else %}
+      <span>Price @ {{product.ProductPrice}}</span><br>
+      {% endif %}
+
+<span style="font-weight: bold;">USD 3664</span><br>
+
+<span>Status</span><br>
+
+<span style="font-weight: bold;">{{product.ProductStatus}}</span><br>
+
+<span>Case Package</span><br>
+
+<span style="font-weight: bold;">{{product.ProductPackage}}</span><br>
+
+<span>Number of Products</span><br>
+
+<span style="font-weight: bold;">{{product.ProductQuantity}}</span><br>
+
+{% if product.ProductArchitecture %}
+<span>Core Architecture</span><br>
+
+<span style="font-weight: bold;">{{product.ProductArchitecture}}</span><br>
+{% endif %}
+
+{% if product.MemorySize %}
+<span>Memory Size</span><br>
+
+<span style="font-weight: bold;">{{product.MemorySize}}</span><br>
+{% endif %}
+
+{% if product.MaxFrequency %}
+<span>Maxmum Frequency</span><br>
+
+<span style="font-weight: bold;">{{product.MaxFrequency}}</span><br>
+{% endif %}
+
+
+{% if product.MemoryType %}
+<span>Memory Type</span><br>
+
+<span style="font-weight: bold;">{{product.MemoryType}}</span><br>
+{% endif %}
+
+
+{% if product.Peripherals %}
+<span>Peripherals</span><br>
+
+<span style="font-weight: bold;">{{product.Peripherals}}</span><br>
+{% endif %}
+
+
+{% if product.MaxSupplyVoltage %}
+<span>Maximum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{product.MaxSupplyVoltage}}</span><br>
+{% endif %}
+
+
+{% if product.MinSupplyVoltage %}
+<span>Minimum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{product.MinSupplyVoltage}}</span><br>
+{% endif %}
+
+
+{% if product.AuthorizedDistributers %}
+<span>Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{product.AuthorizedDistributers}}</span><br>
+{% endif %}
+
+<a href="{% url 'view_product' product.pk %}">
+<button class="btn-primary upload-me"><i class='fa fa-eye icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: white;font-size: 20px;margin-right: 5px;background-color: ;"></i> View product</button></a>
+
+
+
+</div><!----mwisho wa column----->
+
+{% endfor %}
+
+
+
+{% else %}
+
+<span style="font-size: 20px;color: red;font-weight: bold;margin-top: 1cm;">No Similar Product </span> <span style="font-size: 20px;color: black;font-weight: bold;margin-top: 1cm;">!!!!!!!!!</span>
+
+{% endif %}
+
+
+
+
+
+
+
+</div><!----mwisho wa row----->
+
+
+
+</div><!--MWISHO wa COLUMN--->
+<!-------------mwisho wa other parts------------------------------------>
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+
+
+
+
+
+</div><!--mwisho wa container--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'MyApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'MyApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+   <script >
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskel",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      
+
+    ];
+
+   $( "#ProductName" ). autocomplete({
+    source: "{% url 'search_product_autocomplete' %}",
+  });
+
+
+  } );
+  
+  
+
+</script>
+
+
+</body>
+</html>
+
+{% endblock %}

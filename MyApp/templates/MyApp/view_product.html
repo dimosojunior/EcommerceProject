@@ -1,0 +1,1367 @@
+
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+     <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+
+    
+<style type="text/css">
+  
+* {
+  font-family: "Times New Roman", Times, serif;
+
+}
+body {
+  /*background: #f1fbff;*/
+  background-color:black;
+  color: white;
+}
+span{
+  color: white;
+}
+
+html{
+  font-size: 16px;
+  font-family: serif;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+a{
+  text-decoration: none;
+
+}
+li{
+  list-style: none;
+}
+
+
+
+img{
+    width: 100%;
+    display: block;
+}
+.main-wrapper{
+    /*min-height: 100vh;*/
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.container-fluid{
+  margin: 0;
+    padding: 0;
+    /*max-width: 1200px;*/
+    /*padding: 0 1rem;*/
+    /*margin: 0 auto;*/
+}
+.product-div{
+    /*margin: 1rem 0;
+    padding: 2rem 0;*/
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color:black;
+    border-radius: 3px;
+    column-gap: 5px;
+}
+.product-div-left{
+    padding: 10px;
+    /*border: 2px solid black;
+    margin-left: 10px;
+    margin-left: 10px;*/
+}
+.product-div-right{
+    padding: 0px;
+}
+.img-container img{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 7px;
+}
+.hover-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+}
+.hover-container div{
+    /*border: 2px solid rgba(252, 160, 175, 0.7);
+    padding: 1rem;*/
+    border-radius: 3px;
+    margin: 10px 8px 8px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.active{
+    border-color: rgb(255, 145, 163)!important;
+}
+.hover-container div:hover{
+    border-color: rgb(255, 145, 163);
+}
+.hover-container div img{
+    width: 100px;
+    height: 80px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.product-div-right span{
+    display: block;
+}
+.product-name{
+    font-size: 18px;
+    margin-bottom: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+.product-price{
+    font-weight: 700;
+    font-size: 24px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+.product-rating{
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+.product-rating span{
+    margin-right: 6px;
+}
+.product-description{
+    font-weight: 18px;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 22px;
+}
+.btn-groups{
+    margin-top: 22px;
+}
+.btn-groups button{
+    display: inline-block;
+    font-size: 16px;
+    font-family: inherit;
+    text-transform: uppercase;
+    padding: 15px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-groups button .fas{
+    margin-right: 8px;
+}
+.add-cart-btn{
+    background-color: #FF9F00;
+    border: 2px solid #FF9F00;
+    margin-right: 8px;
+}
+.add-cart-btn:hover{
+    background-color:black;
+    color: #FF9F00;
+}
+.buy-now-btn{
+    background-color: #000;
+    border: 2px solid #000;
+}
+.buy-now-btn:hover{
+    background-color:black;
+    color: #000;
+}
+
+@media screen and (max-width: 992px){
+    .product-div{
+        grid-template-columns: 100%;
+    }
+    .product-div-right{
+        text-align: center;
+    }
+    .product-rating{
+        justify-content: center;
+    }
+    .product-description{
+        max-width: 400px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .btn-groups button{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+</style>
+
+
+</head>
+<body>
+
+
+
+
+
+
+<div class="container-fluid" style="margin-bottom: 50px;margin-top: 100px;"><!--mwanzo wa container--->
+  
+
+
+
+
+
+
+
+
+<!------------------view details page----------------------------------------->
+
+
+ <center>
+  <div class="row view-page1" style="margin-top: 10px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1)"><!---mwanzo wa row----->
+   
+<h1 style="color: white;font-weight: bold;font-size: 18px;">{{product.ProductName}}</h1>
+      <div class="col-md-2"><!---mwanzo wa column----->
+     <img src="{{product.image.url}}" class="rounded-circle" style="width: 80px;height: 80px;">     
+      </div><!---mwisho wa column----->
+
+
+   <div class="col-md-8" style="margin-top: 15px;"><!---mwanzo wa column----->   
+      
+{% if product.description %}
+      <p style="float: left;text-align: left;">
+        
+
+        <span>{{product.description}}</span><br>
+<a href="{% url 'home' %}">
+      <button class="btn-primary upload-me" style="margin-top:10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 18px;margin-right: 5px;background-color: ;"></i> Return Back</button>  </a>
+      </p>
+
+    {% else %}
+    <p style="float: left;text-align: left;font-size: 18px;">
+        Buy what you love and earn extra money with a rewarding side hustle, offer the Products of your choice - Online and Locally.
+
+        <br>
+<a href="{% url 'home' %}" style="margin-left: 10px;">
+      <button class="btn-primary upload-me" style="margin-top:10px;padding: 5px;border-radius: 5px;"><i class='fa fa-eye icon'  style="color: white;font-size: 16px;margin-right: 5px;background-color: ;"></i>  Return Back</button>  </a>
+      </p>
+
+    {% endif %}
+
+</div><!---mwisho wa column----->
+
+  
+    
+  </div><!---mwisho wa row------------------------------------>
+  </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------VIEW PAGE TWO (02) --------------------------------->
+
+
+<center>
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 0px;"><!--mwanzo wa row--->
+
+      {% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong style="font-size: 16px;">{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+
+
+
+<center> <span style="font-size: 18px;font-weight: bold;">More</span><br></center>
+
+
+
+
+
+
+<!-- mwanzo wa div wrapper -->
+ <div class = "main-wrapper">
+        <div class = "container-fluid">
+            <div class = "product-div">
+                <div class = "product-div-left">
+                    <div class = "img-container" style="justify-content: center;">
+                        <img src = "{{product.image.url}}" alt = "watch" style="height: 5cm;">
+                    </div>
+                    {% if product.SimilarImage1 %}
+                    <center><h2 style="font-weight: bold;font-size: 18px;margin-top: 10px;">
+                    
+                  More Appearance</h2></center>
+                  {% endif %}
+                    <div class = "hover-container" style="display: flex;border: 2px solid wheat;">
+
+                      {% if product.SimilarImage1 %}
+                        <div><img src = "{{product.SimilarImage1.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage2 %}
+                        <div><img src = "{{product.SimilarImage2.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage3 %}
+                        <div><img src = "{{product.SimilarImage3.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage4 %}
+                        <div><img src = "{{product.SimilarImage4.url}}"></div>
+                        {% endif %}
+
+
+
+                        {% if product.SimilarImage5 %}
+                        <div><img src = "{{product.SimilarImage5.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage6 %}
+                        <div><img src = "{{product.SimilarImage6.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage7 %}
+                        <div><img src = "{{product.SimilarImage7.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage8 %}
+                        <div><img src = "{{product.SimilarImage8.url}}"></div>
+                        {% endif %}
+
+
+                        {% if product.SimilarImage9 %}
+                        <div><img src = "{{product.SimilarImage9.url}}"></div>
+                        {% endif %}
+
+                       
+
+
+
+                    </div>
+                </div>
+                <div class = "product-div-right">
+                    <span class = "product-name" style="font-size: 18px">{{product.ProductName}}</span>
+                    
+
+                  {% if product.ProductDiscountPrice %} 
+                 <span class = "product-price" style="font-weight: bold;margin-top: 17px;"> <strike>Tsh {{product.ProductPrice}}/=</strike></span>
+
+                <span class = "product-price" style="font-weight: bold;margin-top: 17px;">Tsh {{product.ProductDiscountPrice}}/=</span>
+                {% else %}
+                <span class = "product-price" style="font-weight: bold;margin-top: 17px;">Tsh {{product.ProductPrice}}/=</span>
+
+                {% endif %}
+
+
+
+
+                    <div class = "product-rating" style="justify-content: center;">
+                        <span><i class = "fas fa-star"></i></span>
+                        <span><i class = "fas fa-star"></i></span>
+                        <span><i class = "fas fa-star"></i></span>
+                        <span><i class = "fas fa-star"></i></span>
+                        <span><i class = "fas fa-star-half-alt"></i></span>
+                        {% if product.ratings %}
+
+                        <span>{{product.ratings}}</span>
+
+                        {% else %}
+                        <span>(350 ratings)</span>
+                        {% endif %}
+                    </div>
+                    <p class = "product-description">
+                      
+                    </p>
+                   <div style="display: flex;justify-content: center;margin-bottom: 15px;">
+  <a href="{{product.get_add_to_cart_url}}" >
+     <button class="btn-primary upload-me" style="margin-top:10px;margin-right: 20px;padding: 5px;border-radius: 5px;"> Order now</button></a>  
+
+<a href="{{product.get_remove_from_cart_url}}">
+        <button class="btn-danger upload-me" style="margin-top:10px;margin-right: 10px;padding: 5px;border-radius: 5px;"> Remove</button> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- mwisho wa div wrapper -->
+
+
+
+  
+
+
+
+
+
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+<!--------HELP PAGE  () --------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+<!-- __________________HELP_________________________________ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!------PRICE AND STOCK------------------------------->
+
+
+
+
+
+
+<center>
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 15px;"><!--mwanzo wa row--->
+
+
+
+<div class="col-md-12" style="float: left;text-align: left;"><!--mwanzo wa column--->
+
+<span style="font-weight: bold;font-size: 18px;">Price & Stock</span>
+
+
+  <p style="font-size: 18px;">Product Category: {{product.category.CategoryName}}<br>
+    Product Type: {{product.product_category.CategoryName}}<br>
+    Product Name: {{product.ProductName}}<br>
+
+    {% if product.AuthorizedDistributers %}
+    <span style="font-size: 18px;font-weight: bold;">Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{product.AuthorizedDistributers}}</span><br>
+{% endif %}
+  </p>
+
+
+
+
+  
+</div><!--mwisho wa column--->
+
+
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+{% if product %}
+
+<div class="row"><!---mwanzo wa row--------->
+
+
+   <div class="product-specifications" style="margin-top: 20px;">
+
+
+<center><h2 style="font-size: 18px;">{{product.ProductName}} Specifications</h2></center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---MWANZO WA KUDISPLAY PRODUCTS--------------------------------->
+
+
+<div class="row" style="padding: 10px;margin-bottom: 30px; box-shadow: -10px 10px  10px rgba(0,255,255,0.1)"><!---mwanzo wa row--------->
+  
+<div class="col-md-4" ><!---mwanzo wa column--------->
+
+{% if product.image %}
+<center>
+  <img src="{{product.image.url}}" class="product-image" style="width: 70%;height:190px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1)"> 
+</center>
+{% else %}
+<center>
+  <img src="{% static 'MyApp/assets/img/sample.jpeg' %}" class="product-image" style="width: 80%;height:300px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1)"> 
+</center>
+
+{% endif %}
+
+<div style="display: flex;">
+  
+
+  <h3 style="font-size: 23px;margin-top: 30px;margin-left: 30px;">{{product.ProductName}}<br>
+ <span style="color: red;font-size: 18px;"> {{product.ProductStatus}}</span></h3></div>
+
+
+<div style="display: flex;">
+  
+
+  <h3 style="font-size: 23px;margin-top: 30px;margin-left: 30px;">
+ {% if product.RAM %}
+<span style="color: red;font-size: 18px;">RAM:</span>
+
+<span style="font-size: 18px;">{{product.RAM}}</span><br>
+{% endif %}
+
+
+{% if product.InternalStorage %}
+<span style="color: red;font-size: 18px;">Internal Storage:</span>
+
+<span style="font-size: 18px;">{{product.InternalStorage}}</span><br>
+{% endif %}
+
+{% if product.Guarantee %}
+<span style="color: red;font-size: 18px;">Guarantee:</span>
+
+<span style="font-size: 18px;">{{product.Guarantee}}</span><br>
+{% endif %}
+
+</h3></div>
+
+<hr>
+
+
+<div style="display: flex;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 10px;">
+{% if product.ProductDiscountPrice %}
+<h3 style="margin-top: 10px;font-size: 17px;font-weight: bold;"><strike>Tsh {{product.ProductPrice}}/=</strike>
+<span style="margin-top: 10px;">Tsh {{product.ProductDiscountPrice}}/=</span></h3>
+{% else %}
+<span style="margin-top: 10px;">Tsh {{product.ProductPrice}}/=</span>
+{% endif %}
+
+
+
+
+</div>
+
+<hr>
+
+
+
+
+</div><!---mwisho wa column--------->
+
+
+<div class="col-md-8" style="display: flex; box-shadow: 1px 1px  1px 1px rgba(0,0,0,0.1)"><!---mwanzo wa column--------->
+
+
+
+<div class="col-md-4" style="width: 32%;margin-right: 15px;"><!----mwanzo wa div---------------->
+  <span>Case Package</span><br>
+
+    <span style="font-weight: bold;">{{product.ProductPackage}}</span><br>
+
+<span>Number of Products</span><br>
+
+<span style="font-weight: bold;">{{product.ProductQuantity}}</span><br>
+
+{% if product.ProductArchitecture %}
+<span>Core Architecture</span><br>
+
+<span style="font-weight: bold;">{{product.ProductArchitecture}}</span><br>
+{% endif %}
+
+
+
+
+
+
+ {% if product.OS %}
+<span>Operating System</span><br>
+
+<span style="font-weight: bold;">{{product.OS}}</span><br>
+{% endif %}
+
+
+ {% if product.SIMType %}
+<span>SIM Type</span><br>
+
+<span style="font-weight: bold;">{{product.SIMType}}</span><br>
+{% endif %}
+
+
+{% if product.Peripherals %}
+<span>Peripherals</span><br>
+
+<span style="font-weight: bold;">{{product.Peripherals}}</span><br>
+{% endif %}
+
+{% if product.AuthorizedDistributers %}
+<span>Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{product.AuthorizedDistributers}}</span><br>
+{% endif %}
+  
+</div><!------mwisho wa div--------------->
+
+<div class="col-md-4" style="width: 33%;margin-right: 15px;"><!----mwanzo wa div---------------->
+  
+  {% if product.MemoryType %}
+<span>Memory Type</span><br>
+
+<span style="font-weight: bold;">{{product.MemoryType}}</span><br>
+{% endif %}
+
+
+
+
+ {% if product.MemorySize %}
+<span>Memory Size</span><br>
+
+<span style="font-weight: bold;">{{product.MemorySize}}</span><br>
+{% endif %}
+
+{% if product.MaxFrequency %}
+<span>Maxmum Frequency</span><br>
+
+<span style="font-weight: bold;">{{product.MaxFrequency}}</span><br>
+{% endif %}
+
+
+
+
+
+{% if product.MaxSupplyVoltage %}
+<span>Maximum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{product.MaxSupplyVoltage}}</span><br>
+{% endif %}
+
+
+{% if product.MinSupplyVoltage %}
+<span>Minimum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{product.MinSupplyVoltage}}</span><br>
+{% endif %}
+
+
+
+
+
+
+{% if product.ExternalStorage %}
+<span>External Storage</span><br>
+
+<span style="font-weight: bold;">{{product.ExternalStorage}}</span><br>
+{% endif %}
+
+
+  
+</div><!------mwisho wa div--------------->
+
+
+<div class="col-md-4" style="width: 33%;margin-right: 15px;"><!----mwanzo wa div---------------->
+
+   {% if product.ScreenSize %}
+<span>Screen Size</span><br>
+
+<span style="font-weight: bold;">{{product.ScreenSize}}</span><br>
+{% endif %}
+
+ {% if product.ProcessorType %}
+<span>Processor Type</span><br>
+
+<span style="font-weight: bold;">{{product.ProcessorType}}</span><br>
+{% endif %}
+
+  {% if product.RearCamera %}
+<span>Rear Camera</span><br>
+
+<span style="font-weight: bold;">{{product.RearCamera}}</span><br>
+{% endif %}
+
+{% if product.FrontCamera %}
+<span>Front Camera</span><br>
+
+<span style="font-weight: bold;">{{product.FrontCamera}}</span><br>
+{% endif %}
+
+{% if product.Battery %}
+<span>Battery</span><br>
+
+<span style="font-weight: bold;">{{product.Battery}}</span><br>
+{% endif %}
+  
+</div><!------mwisho wa div--------------->
+
+
+
+
+
+
+</div><!-----mwisho wa column ya 8----->
+
+
+
+</div><!------mwisho wa row--------------->
+
+
+<hr>
+
+
+
+
+<!---MWISHO WA KUDISPLAY PRODUCTS--------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</div>
+  
+</div><!---mwisho wa row--------->
+<hr>
+
+
+
+{% else %}
+
+<span style="font-size: 20px;color: red;font-weight: bold;margin-top: 1cm;">No Product Yet</span> <span style="font-size: 20px;font-weight: bold;margin-top: 1cm;">!!!!!!!!!</span>
+
+{% endif %}
+
+
+<!---MWISHO WA KUDISPLAY PRODUCTS--------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------EXPLORE CATEGORIES-------------------->
+
+
+
+
+<!---ROW YA CATEGORY---->
+
+<center>
+<div class="row category-section"><!--mwanzo wa row--->
+  
+<center><h1 style="font-size: 20px;font-weight: bold;">Browse parts by category</h1></center>
+{% if categories %}
+
+{% for x in categories %}
+<div class="col-md-3" style="margin-bottom: 15px;"><!--mwanzo wa column--->
+   <!---mwanzo wa card--->
+<div class="card text-center" style="border-radius: 5px;">
+  
+  <div class="card-body">
+
+  {% if x.image %}
+  <center>
+
+   <a href="{{x.get_absolute_url}}"><img src="{{x.image.url}}" style="width: 80%;height:150px; "></a> <br></center>
+      {% else %}
+      <img src="{% static 'MyApp/assets/img/sample.jpeg' %}" class="rounded-circle" style="width: 80%;height:150px; "> 
+
+{% endif %}
+      <span style="font-weight: bold;font-size: 16px;">{{x.CategoryName}}</span>
+    
+  </div>
+  
+</div>
+
+
+<!---mwisho wa card---->
+</div><!--mwisho wa column--->
+
+{% endfor %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------HELP PAGE  () --------------------------------->
+
+
+
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 5px;"><!--mwanzo wa row--->
+
+
+
+<center> <span style="font-size: 18px;font-weight: bold;">HELP</span><br></center>
+
+<div class="col-md-4" style="float: left;text-align: left;"><!--mwanzo wa column--->
+
+  <p>
+
+   <a href="https://api.whatsapp.com/send?phone=+255628431507text=welcome%20to%20my%20whatsapp/">
+     <button class=" upload-me" style="margin-top:10px;margin-right: 10px;padding: ;border-radius: 50px;background-color: green"><i class="bx bxl-whatsapp" style="color: white;background-color: green;font-size: 16px;border: 1px solid green;"></i><span style="font-size: 16px;color: white;padding: 1px;"> Need Help? Chat with us</span></button></a>   
+
+     
+  </p>
+
+
+<div style="display: flex;">
+  
+
+
+        <button class="btn-primary upload-me" data-bs-toggle="modal" data-bs-target="#ask" style="margin-top:10px;margin-right: 10px;padding: 10px;border-radius: 10px;font-size: 16px;"><i class='fa fa-eye icon'  style="color: white;font-size: 16px;margin-right:5px;background-color: ;"></i> ASk a Question</button> 
+  
+           
+</div>
+
+  
+</div><!--mwisho wa column--->
+
+
+
+
+<!-----MODAL YA BUTTON YA JUUU YA ASK------------------------------------------->
+
+<!------Modal  for ask -->
+
+
+<div class="modal fade" id="ask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(5,5,49);color: white;">
+        <h5 class="modal-title" id="staticBackdropLabel" style="font-size: 16px;"> Ask Your Question </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: rgb(5,5,49);font-size: 16px;">
+
+         
+
+      
+
+      
+        <!--hii nikwa ajili ya kusearch user--->
+               <form action="{% url 'ask' %}" method="POST" enctype="multipart/form-data" >
+
+                   {% csrf_token %}
+
+
+                      
+
+                        <input type="email" name="email"  placeholder="Enter Valid Email" required style="padding: 10px; border-radius: 10px;font-weight: bold;margin-bottom: 10px;width: 100%;font-size: 16px;"><br>
+
+                        <input type="text" name="phone"  placeholder="Enter  Phone Number" required style="padding: 10px; border-radius: 10px;font-weight: bold;margin-bottom: 10px;width: 100%;font-size: 16px;"><br>
+
+                        <textarea name="description" placeholder="Your inquiry" required style="padding: 10px;height: 4cm;width: 100%;font-size: 18px;border: 2px solid black;border-radius: 10px;font-size: 16px;"></textarea>
+
+                         
+
+                     <button class="btn-primary" type="submit" style="color: white;padding: 5px;border-radius: 10px;border-top-right-radius: 0px;margin-top: 20px;font-size: 16px;">Submit</button>
+                   </form>
+
+
+
+     
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="font-size: 18px;">Close</button>
+
+
+
+
+             </div>
+    </div>
+  </div>
+</div>
+<!---mwisho wa modal---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-4" style="margin-top: 15px;margin-right: 10px;"><!--mwanzo wa column--->
+
+
+
+<div style="display: flex;border: 1px solid black;padding: 10px;">
+ <img src="{% static 'MyApp/assets/img/me.jpg' %}" class="rounded-circle" style="width: 150px;height: ;margin-right: 20px;margin-top: 10px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1)">
+
+  
+<p style="font-size: 18px;">
+  <br>
+  <i> Developer</i><br>
+   <span style="font-weight: bold;">DimosoElJunior</span><br>
+   <i class='fa fa-star icon'  style="font-size: 20px;margin-right:5px;background-color: ;"></i>
+   <i class='fa fa-star icon'  style="font-size: 20px;margin-right:5px;background-color: ;"></i>
+   <i class='fa fa-star icon'  style="font-size: 20px;margin-right:5px;background-color: ;"></i>
+   <i class='fa fa-star icon'  style="font-size: 20px;margin-right:5px;background-color: ;"></i>
+   <i class='fa fa-star icon'  style="font-size: 20px;margin-right:5px;background-color: ;"></i>
+</p>
+
+  </div>
+
+</div><!--mwisho wa column--->
+</div><!--MWISHO wa row--->
+
+
+
+
+
+<!-- -----------------------mwisho wa Help------------- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!------SIMILAR PARTS------------------------------->
+
+
+
+
+
+
+<center>
+<div class="row category-section" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 15px;"><!--mwanzo wa row--->
+
+
+
+<div class="col-md-12" style="float: left;text-align: left;"><!--mwanzo wa column--->
+
+<span style="font-weight: bold;font-size: 20px;">Parts with similar Specs</span>
+
+
+  <p>The following parts have similar specifications to  {{product.ProductName}}
+    
+    
+  </p>
+
+
+
+
+  
+</div><!--mwisho wa column--->
+
+
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+<!----------------------------HIZO PARTS ZENYEWE------------------------->
+
+
+
+
+
+
+
+
+
+
+<center>
+<div class="row category-section" style="margin-top: 10px;box-shadow: -10px 10px  10px rgba(0,255,255,0.1);padding: 15px;"><!--mwanzo wa row--->
+
+
+
+
+
+<!-------other parts--------------------------->
+
+<div class="col-md-10" style="float: left;text-align: left;margin-top: 2cm;"><!--mwanzo wa column--->
+ 
+<div class="row"><!----mwanzo wa row----->
+  <center><span style="font-weight: bold;">Similar Parts</span></center>
+
+
+{% if similar_products %}
+{% for product in similar_products %}
+<div class="col-md-3" style="margin-top: 20px;"><!----mwanzo wa column----->
+ 
+<img src="{{product.image.url}}" style="width: 150px;height:margin-top: 10px;border-radius: 8px;height: 150px;"><br>
+
+<span style="font-weight: bold;">{{product.ProductName}}
+</span><br>
+
+
+ {% if product.ProductDiscountPrice %}
+      <span>Price @ {{product.ProductDiscountPrice}}</span><br>
+      {% else %}
+      <span>Price @ {{product.ProductPrice}}</span><br>
+      {% endif %}
+
+
+
+<span>Status</span><br>
+
+<span style="font-weight: bold;">{{product.ProductStatus}}</span><br>
+
+
+<span>Number of Products</span><br>
+
+<span style="font-weight: bold;">{{product.ProductQuantity}}</span><br>
+
+
+
+{% if product.MemorySize %}
+<span>Memory Size</span><br>
+
+<span style="font-weight: bold;">{{product.MemorySize}}</span><br>
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% if product.AuthorizedDistributers %}
+<span>Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{product.AuthorizedDistributers}}</span><br>
+{% endif %}
+
+
+<a href="{% url 'view_product' product.pk %}">
+<button class="btn-primary upload-me" style="margin-top: 15px;"><i class='fa fa-eye icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: white;font-size: 20px;margin-right: 5px;background-color:"></i> View product</button></a>
+
+
+</div><!----mwisho wa column----->
+
+{% endfor %}
+
+
+
+{% else %}
+
+<span style="font-size: 20px;color: red;font-weight: bold;margin-top: 1cm;">No Similar Product </span> <span style="font-size: 20px;font-weight: bold;margin-top: 1cm;">!!!!!!!!!</span>
+
+{% endif %}
+
+
+
+
+
+
+
+</div><!----mwisho wa row----->
+
+
+
+</div><!--MWISHO wa COLUMN--->
+<!-------------mwisho wa other parts------------------------------------>
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!--mwisho wa container--->
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+const allHoverImages = document.querySelectorAll('.hover-container div img');
+const imgContainer = document.querySelector('.img-container');
+
+window.addEventListener('DOMContentLoaded', () => {
+    allHoverImages[0].parentElement.classList.add('active');
+});
+
+allHoverImages.forEach((image) => {
+    image.addEventListener('mouseover', () =>{
+        imgContainer.querySelector('img').src = image.src;
+        resetActiveImg();
+        image.parentElement.classList.add('active');
+    });
+});
+
+function resetActiveImg(){
+    allHoverImages.forEach((img) => {
+        img.parentElement.classList.remove('active');
+    });
+}
+</script>
+
+
+
+
+
+
+
+
+
+ <!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'MyApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'MyApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+   <script >
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskel",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      
+
+    ];
+
+   $( "#ProductName" ). autocomplete({
+    source: "{% url 'search_product_autocomplete' %}",
+  });
+
+
+  } );
+  
+  
+
+</script>
+
+<!--link kwa ajiliya kukreate modal--->
+<script src="{% static 'MyApp/assets/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- --------- Owl-Carousel js ------------------->
+    <script src="{% static 'MyApp/assets/js/owl.carousel.min.js' %}"></script>
+
+    <!-- ------------ AOS js Library  ------------------------- -->
+    <script src="{% static 'MyApp/assets/js/aos.js' %}"></script>
+
+    <!-- Custom Javascript file -->
+    <script src="{% static 'MyApp/assets/js/main.js' %}"></script>
+
+
+
+    <link href="{% static 'MyApp/assets/js/bootstrap.min.js' %}" rel="stylesheet">
+
+    <!-- Vendor JS Files -->
+  <script src="{% static 'MyApp/assets/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+{% endblock content %}

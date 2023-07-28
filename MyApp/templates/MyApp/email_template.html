@@ -1,0 +1,221 @@
+
+{% load static %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+
+ <!-- Vendor CSS Files ----->
+    <link href="{% static 'MyApp/assets/css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'MyApp/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+
+  
+    <link href="{% static 'MyApp/assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+      body{
+       
+
+      }
+
+     /* table tbody tr td,
+table thead tr th,
+table thead{
+  border-left: 2px solid black;
+  border-right:2px solid black;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black; 
+}*/
+h2{
+  font-size: 16px;
+  font-family: 'poppins', sans-serif;
+}
+h1{
+  font-size: 16px;
+  font-family: 'poppins', sans-serif;
+}
+
+ul{
+  list-style: none;
+}
+
+ul li{
+  list-style: none;
+}
+    </style>
+</head>
+<body>
+  
+   
+<center>
+
+<h1>Email from <span style="color: blue;font-weight: bold;">{{username}}</span></h1>
+
+
+</center>
+
+
+
+
+
+  
+<div class="container-fluid">
+  <div class="row"><!---mwanzo wa row------------------------->
+  
+<h1 style="color: black;font-size: 18px;">DIMOSO ELECTRONICS CENTER</h1>
+ 
+
+ <h2 style="color: blue;font-family: bold;font-weight: bold;">Received Email From: {{to}}</h2>
+ <h2 style="color: black;font-family: bold">UserName: {{username}}</h2>
+ <h2 style="color: black;font-family: bold">Phone Number: {{phone}}</h2>
+ <h2 style="color: black;font-family: bold">Email: {{to}}</h2>
+
+ <h2 style="color: black;font-family: bold">Address: {{place}}</h2>
+ 
+</div><!---mwisho wa row------------------------->
+
+  
+
+  
+
+
+<!-- HII NI KWA AJILILI YA KUDISPLAY ORDERS ZOTE -->
+<div class="row"><!---mwanzo wa row------------------------->
+
+
+        
+
+
+
+ <section class="mb-4" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+        {% if order.items.all %}
+  
+        <h1 style="font-size: 16px;margin-top: 20px;font-weight: bold;">Order summary</h1>
+        <div class="table-responsive text-nowrap">
+          
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Item Price</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              {% for order_item in order.items.all %}
+                <tr>
+               
+                <td>{{order_item.item.ProductName}}</td>
+                <td>
+                  <a href="{{order_item.item.get_remove_single_from_cart_url}}">
+                    <i class='fa fa-minus icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 17px;margin-right: 5px;background-color: ;"></i>
+                  </a>
+                  {{order_item.quantity}}
+                   <a href="{{order_item.item.get_add_to_cart_url2}}">
+                   <i class='fa fa-plus icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: blue;font-size: 17px;margin-left: 5px;background-color: ;"></i>
+                  </a>
+                </td>
+                {% if order_item.item.ProductDiscountPrice %}
+                  <td>{{order_item.item.ProductDiscountPrice}}</td>
+                {% else %}
+                  <td>{{order_item.item.ProductPrice}}</td>
+                {% endif %}
+
+                
+                <td>{{order_item.get_final_price}}
+                  {% if order_item.item.discount_price %}
+                    <span class="badge badge-pill badge-info">{{order_item.get_amount_saved}}</span>
+                  {% endif %}
+                </td>
+              
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="5">
+                    <a href="" class="btn btn-outline-primary float-right">Continue Shopping</a>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+             
+                <tr>
+                  <td colspan="4">
+                    <h4 style="font-size: 16px;">Order total</h4>
+                  </td>
+                  <td colspan="1" style="font-weight: bold;">
+                    Tsh. {{order.get_total}}/=
+                  </td>
+                </tr>
+           
+              
+  
+            </tbody>
+          </table>
+          {% else %}
+  
+          <h4 class="mt-5 pt-4">No items in your cart</h4>
+          <a href="" class="btn btn-outline-primary" style="color: white;">Continue Shopping</a>
+          {% endif %}
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+  
+<!-- HAPA NI MWISHO WA KUDISPLAY ORDERS ZOTE -->
+</div><!---mwisho wa row------------------------->
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'MyApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'MyApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+ 
+</body>
+</html>

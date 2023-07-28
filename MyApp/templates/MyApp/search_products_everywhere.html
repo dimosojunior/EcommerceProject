@@ -1,0 +1,638 @@
+
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search Product</title>
+   
+    <style type="text/css">
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+
+
+
+    </style>
+</head>
+<body >
+    <div class="container-fluid" style="margin-top: 50px;margin-bottom: 2cm;">
+
+
+            <h1 style="color: white;">Looking for searched Student</h1>
+
+    {% if query %}
+
+    <h3 style="color: red;font-weight: bold;font-size: 17px;font-family: sans-serif;">{% with results.count as total_results %}
+    found {{total_results}} Product(s)
+    {% endwith %}
+</h3>
+
+
+ 
+
+
+{% if results %}
+
+
+
+
+
+<!------PAGE 03----------------------------------------->
+
+
+<div class="row" style="padding: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row--------->
+  
+<div class="col-md-6" style="display: flex;"><!---mwanzo wa column--------->
+
+  <img src="{% static 'MyApp/assets/img/me.jpg' %}" class="rounded-circle" style="width: 50px;height: 50px;"> 
+
+  <h3 style="color: blue;font-size: 18px;margin-left: 15px;font-weight: bold;"><span style="color: black;">  D-Trader</span><br>
+ www.D-Trader.com</h3>
+</div><!---mwisho wa column--------->
+
+
+</div><!---mwisho wa row--------->
+
+
+
+
+
+
+
+
+
+
+<!---MWANZO WA KUDISPLAY PRODUCTS--------------------------------->
+
+
+{% for x in results %}
+<div class="row" style="padding: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row--------->
+  
+<div class="col-md-4" ><!---mwanzo wa column--------->
+
+{% if x.image %}
+<center>
+  <img src="{{x.image.url}}" class="product-image" style="width: 80%;height:300px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"> 
+</center>
+{% else %}
+<center>
+  <img src="{% static 'MyApp/assets/img/sample.jpeg' %}" class="product-image" style="width: 80%;height:300px ;border-radius: 10px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"> 
+</center>
+
+{% endif %}
+
+</div><!---mwisho wa column--------->
+
+
+<div class="col-md-4" style="box-shadow: 1px 1px  1px 1px rgba(0,0,0,0.1)"><!---mwanzo wa column--------->
+<div style="display: flex;">
+  
+
+  <h3 style="color: black;font-size: 23px;margin-top: 30px;margin-left: 30px;">{{x.ProductName}}<br>
+ <span style="color: red;font-size: 18px;"> {{x.ProductStatus}}</span></h3></div>
+
+
+
+
+<div class="row"><!--mwamzo wa row---->
+
+
+  <div class="col-md-6"><!--mwamzo wa column---->
+
+    <span>Case Package</span><br>
+
+    <span style="font-weight: bold;">{{x.ProductPackage}}</span><br>
+
+<span>Number of Products</span><br>
+
+<span style="font-weight: bold;">{{x.ProductQuantity}}</span><br>
+
+{% if x.ProductArchitecture %}
+<span>Core Architecture</span><br>
+
+<span style="font-weight: bold;">{{x.ProductArchitecture}}</span><br>
+{% endif %}
+
+
+{% if x.MemoryType %}
+<span>Memory Type</span><br>
+
+<span style="font-weight: bold;">{{x.MemoryType}}</span><br>
+{% endif %}
+
+
+
+
+ {% if x.MemorySize %}
+<span>Memory Size</span><br>
+
+<span style="font-weight: bold;">{{x.MemorySize}}</span><br>
+{% endif %}
+
+
+
+ {% if x.OS %}
+<span>Operating System</span><br>
+
+<span style="font-weight: bold;">{{x.OS}}</span><br>
+{% endif %}
+
+
+ {% if x.SIMType %}
+<span>SIM Type</span><br>
+
+<span style="font-weight: bold;">{{x.SIMType}}</span><br>
+{% endif %}
+
+ {% if x.ScreenSize %}
+<span>Screen Size</span><br>
+
+<span style="font-weight: bold;">{{x.ScreenSize}}</span><br>
+{% endif %}
+
+ {% if x.ProcessorType %}
+<span>Processor Type</span><br>
+
+<span style="font-weight: bold;">{{x.ProcessorType}}</span><br>
+{% endif %}
+
+ {% if x.RAM %}
+<span>RAM</span><br>
+
+<span style="font-weight: bold;">{{x.RAM}}</span><br>
+{% endif %}
+    
+  </div><!--mwisho wa column---->
+
+
+  <div class="col-md-6"><!--mwamzo wa column---->
+
+  
+
+{% if x.MaxFrequency %}
+<span>Maxmum Frequency</span><br>
+
+<span style="font-weight: bold;">{{x.MaxFrequency}}</span><br>
+{% endif %}
+
+
+{% if x.Peripherals %}
+<span>Peripherals</span><br>
+
+<span style="font-weight: bold;">{{x.Peripherals}}</span><br>
+{% endif %}
+
+
+{% if x.MaxSupplyVoltage %}
+<span>Maximum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{x.MaxSupplyVoltage}}</span><br>
+{% endif %}
+
+
+{% if x.MinSupplyVoltage %}
+<span>Minimum Supply Voltage</span><br>
+
+<span style="font-weight: bold;">{{x.MinSupplyVoltage}}</span><br>
+{% endif %}
+
+{% if x.AuthorizedDistributers %}
+<span>Authorized Distributers</span><br>
+
+<span style="font-weight: bold;">{{x.AuthorizedDistributers}}</span><br>
+{% endif %}
+
+
+{% if x.InternalStorage %}
+<span>Internal Storage</span><br>
+
+<span style="font-weight: bold;">{{x.InternalStorage}}</span><br>
+{% endif %}
+
+{% if x.ExternalStorage %}
+<span>External Storage</span><br>
+
+<span style="font-weight: bold;">{{x.ExternalStorage}}</span><br>
+{% endif %}
+
+{% if x.RearCamera %}
+<span>Rear Camera</span><br>
+
+<span style="font-weight: bold;">{{x.RearCamera}}</span><br>
+{% endif %}
+
+{% if x.FrontCamera %}
+<span>Front Camera</span><br>
+
+<span style="font-weight: bold;">{{x.FrontCamera}}</span><br>
+{% endif %}
+
+{% if x.Battery %}
+<span>Battery</span><br>
+
+<span style="font-weight: bold;">{{x.Battery}}</span><br>
+{% endif %}
+
+{% if x.Guarantee %}
+<span>Guarantee</span><br>
+
+<span style="font-weight: bold;">{{x.Guarantee}}</span><br>
+{% endif %}
+
+    
+  </div><!--mwisho wa column---->
+  
+</div><!--mwisho wa row---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!---mwisho wa column--------->
+
+
+
+<div class="col-md-4" style="margin-top: 20px;"><!---mwanzo wa column--------->
+
+<div style="display: flex;">
+{% if x.ProductDiscountPrice %}
+<h3 style="margin-top: 10px;font-size: 17px;font-weight: bold;"><strike>Tsh {{x.ProductPrice}}/=</strike>
+<span style="margin-top: 10px;">Tsh {{x.ProductDiscountPrice}}/=</span></h3>
+{% else %}
+<span style="margin-top: 10px;">Tsh {{x.ProductPrice}}/=</span>
+{% endif %}
+
+
+
+<a href="{% url 'view_product' x.pk %}">
+<button class="btn-primary upload-me" style="margin-left: 10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 20px;"></i> View</button></a>
+
+
+<!-- <button class="btn-danger upload-me" data-bs-toggle="modal" data-bs-target="#menu" style="margin-left: 10px;"><i class='fa fa-plus icon'  style="color: white;font-size: 18px;"></i> </button> -->
+
+
+
+</div>
+
+  </div><!---mwisho wa column--------->
+
+
+</div><!---mwisho wa row--------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row"><!---mwanzo wa row--------->
+
+
+   <div class="table-responsive text-nowrap">
+
+<table class="table table-bordered" style="font-size: 19px;background-color: ">
+
+
+
+  <thead>
+    <tr>
+    <th colspan="1">Distributer</th>
+    <th colspan="1">Place</th>
+    <th colspan="1">Stock</th>
+    <th colspan="1">Status</th>
+    
+    <th colspan="1">Pkg</th>
+    <th colspan="1"> </th>
+    <th colspan="1">1</th>
+    <th colspan="1">10</th>
+    <th colspan="1">100</th>
+    
+  </tr>
+
+
+
+
+  </thead>
+
+
+
+
+  <tbody>
+
+        
+    <tr>
+
+      {% if x.D1 %}
+      <td>{{x.D1}}</td>
+       <td>{{x.D1_place}}</td>
+       {% else %}
+       <td>Distributer 1</td>
+       <td>Dar es salaam</td>
+       {% endif %}
+
+
+
+      <td>{{x.ProductQuantity}}</td>
+     <td>{{x.ProductStatus}}</td>
+      <td>{{x.ProductPackage}}</td>
+      <td>Tsh</td>
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}</td>
+      {% else %}
+      <td>{{x.ProductPrice}}</td>
+      {% endif %}
+
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}0</td>
+      {% else %}
+      <td>{{x.ProductPrice}}0</td>
+      {% endif %}
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}00</td>
+      {% else %}
+      <td>{{x.ProductPrice}}00</td>
+      {% endif %}
+    
+      
+    </tr>
+
+
+    <tr>
+
+      {% if x.D2 %}
+      <td>{{x.D2}}</td>
+       <td>{{x.D2_place}}</td>
+       {% else %}
+       <td>Distributer 2</td>
+       <td>Dar es salaam</td>
+       {% endif %}
+
+      <td>{{x.ProductQuantity}}</td>
+     <td>{{x.ProductStatus}}</td>
+      <td>{{x.ProductPackage}}</td>
+      <td>Tsh</td>
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}</td>
+      {% else %}
+      <td>{{x.ProductPrice}}</td>
+      {% endif %}
+
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}0</td>
+      {% else %}
+      <td>{{x.ProductPrice}}0</td>
+      {% endif %}
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}00</td>
+      {% else %}
+      <td>{{x.ProductPrice}}00</td>
+      {% endif %}
+    
+      
+    </tr>
+
+
+    <tr>
+
+       {% if x.D3 %}
+      <td>{{x.D3}}</td>
+       <td>{{x.D3_place}}</td>
+       {% else %}
+       <td>Distributer 3</td>
+       <td>Dar es salaam</td>
+       {% endif %}
+
+      <td>{{x.ProductQuantity}}</td>
+     <td>{{x.ProductStatus}}</td>
+      <td>{{x.ProductPackage}}</td>
+      <td>Tsh</td>
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}</td>
+      {% else %}
+      <td>{{x.ProductPrice}}</td>
+      {% endif %}
+
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}0</td>
+      {% else %}
+      <td>{{x.ProductPrice}}0</td>
+      {% endif %}
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}00</td>
+      {% else %}
+      <td>{{x.ProductPrice}}00</td>
+      {% endif %}
+    
+      
+   <tr>
+
+      {% if x.D4 %}
+      <td>{{x.D4}}</td>
+       <td>{{x.D4_place}}</td>
+       {% else %}
+       <td>Distributer 4</td>
+       <td>Dar es salaam</td>
+       {% endif %}
+
+      <td>{{x.ProductQuantity}}</td>
+     <td>{{x.ProductStatus}}</td>
+      <td>{{x.ProductPackage}}</td>
+      <td>Tsh</td>
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}</td>
+      {% else %}
+      <td>{{x.ProductPrice}}</td>
+      {% endif %}
+
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}0</td>
+      {% else %}
+      <td>{{x.ProductPrice}}0</td>
+      {% endif %}
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}00</td>
+      {% else %}
+      <td>{{x.ProductPrice}}00</td>
+      {% endif %}
+    
+      
+    </tr>
+
+
+
+    <tr>
+
+      {% if x.D5 %}
+      <td>{{x.D5}}</td>
+       <td>{{x.D5_place}}</td>
+       {% else %}
+       <td>Distributer 5</td>
+       <td>Dar es salaam</td>
+       {% endif %}
+
+      <td>{{x.ProductQuantity}}</td>
+     <td>{{x.ProductStatus}}</td>
+      <td>{{x.ProductPackage}}</td>
+      <td>Tsh</td>
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}</td>
+      {% else %}
+      <td>{{x.ProductPrice}}</td>
+      {% endif %}
+
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}0</td>
+      {% else %}
+      <td>{{x.ProductPrice}}0</td>
+      {% endif %}
+
+      {% if x.ProductDiscountPrice %}
+      <td>{{x.ProductDiscountPrice}}00</td>
+      {% else %}
+      <td>{{x.ProductPrice}}00</td>
+      {% endif %}
+    
+      
+    </tr>
+
+      </tbody>
+
+
+
+
+
+
+
+
+    
+
+  
+
+
+
+
+</table>
+    
+</div>
+  
+</div><!---mwisho wa row--------->
+<hr>
+{% empty %}
+<span style="font-size: 20px;color: red;font-weight: bold;margin-top: 1cm;">No Product Yet</span> <span style="font-size: 20px;color: black;font-weight: bold;margin-top: 1cm;">!!!!!!!!!</span>
+{% endfor %}
+
+
+
+
+<!---MWISHO WA KUDISPLAY PRODUCTS--------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+
+<span style="font-size: 20px;color: red;font-weight: bold;margin-top: 1cm;">No Product Yet</span> <span style="font-size: 20px;color: black;font-weight: bold;margin-top: 1cm;">!!!!!!!!!</span>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+{% else %}
+<h3>Error in your query</h3>
+{% endif %}
+
+    </div>
+
+
+
+
+
+{% include "MyApp/final_description.html" %}
+
+
+
+    
+
+    <script>
+        const thumbs = document.querySelectorAll('.thumb');
+        const slider = document.querySelector('.slider');
+        
+        function changeImage(){
+           thumbs.forEach(thumb => thumb.classList.remove('active')); 
+            this.classList.add('active');
+            slider.getElementsByTagName('img')[0].src = this.getElementsByTagName('img')[0].src;
+        }
+        
+        thumbs.forEach(thumb => thumb.addEventListener('click', changeImage));
+        
+    </script>
+</body>
+</html>
+
+{% endblock %}

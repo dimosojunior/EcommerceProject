@@ -1,0 +1,42 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body style="background-color: #128C7E;color: white;margin-top: 2cm">
+
+<div class="container" style="margin-bottom: 2cm"">
+
+{% if messages %}
+    {% for message in messages %}
+
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #128C7E;color: white;">
+  <strong style="color: white">{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+
+    {% else %}
+    <center>
+    <a href="{% url 'checkout' %}">
+  <button style="background-color: white;color: black;border-radius: 10px;padding: 10px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;margin-top: 3cm;"><i class='fa fa-home icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> Go Back</button></a>
+  </center>
+
+  {% endif %}
+
+
+</div>
+
+
+</body>
+</html>
+{% endblock %}

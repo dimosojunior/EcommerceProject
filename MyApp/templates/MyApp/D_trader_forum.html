@@ -1,0 +1,102 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+{% load MyApp %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+
+         <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+        
+
+<style type="text/css">
+ 
+</style>
+</head>
+    <body style="background-color: ;margin-top: 2cm;">
+
+  {% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong style="color: white;font-weight: bold;">{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+
+
+
+<div class="container-fluid" style="margin-top: 2cm;">
+  
+
+
+<div class="row"><!---mwanzo wa row---->
+  
+<div style="display: flex;"><!---mwanzo wa div---->
+
+  <span style="font-size: 18px;font-weight: bold;margin-right:200px; ">D-Trader </span><br>
+{% if request.user|cart_item_count != 0 %}
+  <button style="background-color: black;color: white;border-radius: 10px;padding: 5px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;"><i class='fa fa-bell icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: white;font-size: 20px;margin-right: 5px;background-color: ;"> {{ request.user|cart_item_count}}</i></button>
+  {% else %}
+
+  <button style="background-color: black;color: white;border-radius: 10px;padding: 5px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;"><i class='fa fa-bell icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> 0</button>
+  {% endif %}
+  
+</div><!---mwisho wa div---->
+
+<div class="col-md-4">
+<p style="margin-top: 20px;">
+  Welcome to the D-Trader website, This is a Website that allows people to buy and sell physical goods, services, and digital products over the Internet rather than at a brick and mortal location. Through a D-Trader, a business can process orders, accept payments, manage shipping and logistics, and provide customer service.<br>
+
+<a href="{% url 'home' %}">
+  <button style="background-color: blue;color: white;border-radius: 10px;padding: 20px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;margin-top: 20px;"><i class='fa fa-home icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> Continue Shopping</button></a>
+
+</p>
+</div>
+
+</div><!---mwisho wa row---->
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+ 
+
+{% include "MyApp/final_description.html" %}
+
+ </body>
+</html>
+
+
+{% endblock content %}
+  
+ 

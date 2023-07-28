@@ -1,0 +1,252 @@
+{% extends 'MyApp/base.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+
+         <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+        <!-- font awesome -->
+        
+
+<style type="text/css">
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.content{
+    
+    background: #08071d;
+    display: block;
+    /*justify-content: center;
+    align-items: center;*/
+    background: url("{% static 'MyApp/assets/img/bg.png' %}") no-repeat center center/cover;
+    margin-top: 1cm;
+}
+
+.content form{
+    width: 100%;
+    
+    display: block;
+   
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+
+}
+
+.content form h1{
+    color: #fff;
+    font-weight: 500;
+    margin-top: 20px;
+    
+    text-align: left;
+}
+
+.content form input{
+    width: 90%;
+    height: 40px;
+    padding-left: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 10px;
+    background: none;
+    border-bottom: 2px solid #fff;
+    color: white;
+}
+
+.content form input::placeholder{
+    color: #ddd;
+}
+
+.content form #lastName,
+.content form #mobile{
+    margin-left: 20px;
+}
+
+.content form h4{
+    color: #fff;
+    font-weight: 300;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.content form textarea{
+    background: none;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: 200;
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+    width: 90%;
+    /*min-width: 600px;
+    max-width: 600px;*/
+    min-height: 80px;
+    max-height: 80px;
+}
+
+textarea::-webkit-scrollbar{
+    width: 1em;
+}
+
+textarea::-webkit-scrollbar-thumb{
+    background-color: rgba(194,194,194,0.713);
+}
+
+.content form #button{
+    border: none;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #333;
+    
+    padding: 10px;
+    width: 50%;
+    
+    margin-bottom: 30px;
+    transition: 0.3s;
+}
+
+.content form #button:hover{
+    opacity: 0.7;
+}
+
+
+</style>
+</head>
+    <body style="background-color: black;">
+
+<main class="mt-1 pt-1">
+  <div class="container-fluid wow fadeIn">
+
+ 
+    <div class="row" style="margin-top: 2cm;">
+      <div class="col-md-8 mb-4">
+
+
+
+
+
+
+
+  <div class="container-fluid content">
+{% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong style="color: red;font-weight: bold;">{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+    
+
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <h1 style="font-size: 20px;margin-bottom: 15px;padding-top:  15px;text-align: center;">SEND EMAIL</h1>
+             <label style="color: white;font-weight: bold;">Email:</label><br>
+               {{form.email}}<br>
+            
+            <label style="color: white;font-weight: bold;">Phone Number:</label><br>
+               {{form.phone}}<br>
+
+            <label style="color: white;font-weight: bold;">Adrress:</label><br>
+               {{form.place}}<br>
+
+            
+            
+            <h4>Type Your Message Here...</h4><br>
+            {{form.message}}<br>
+
+
+
+            <div class="row" style="color: black;background-color: white;margin-bottom: 1cm;font-size: 18px;font-family: sans-serif;margin-top: 1cm;"><!---mwanzo wa row----->
+
+
+  <span>Cash on delivery</span><br>
+
+  <p class="btn-secondary" style="padding: 10px;border-radius: 5px;border-top-right-radius: 0px;color: black;width: 80%;margin-left: 20px;">Lipa baada ya kupokea bidhaa</p><br>
+
+  <hr class="mb-4">
+
+  <p>
+    Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.<br>
+
+
+
+<input type="checkbox" name="" required style="width: 30px;height: 30px;margin-top: 20px;"><span style="margin-left: 20px;color: black;">I have read and agree to te website terms and conditions.</span><br>
+
+  </p>
+  
+
+
+</div><!---mwisho wa row-------->
+
+
+            <input type="submit" value="Send Email" id="button">
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+      </div><!---mwisho wa column ya width ya 8---->
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-4 mb-4">
+        {% include "MyApp/snippet.html" %}
+      </div>
+    </div>
+  </div>
+</main> 
+
+
+
+
+
+
+{% include "MyApp/final_description.html" %}
+
+
+ </body>
+</html>
+
+
+{% endblock content %}
+  
+ 

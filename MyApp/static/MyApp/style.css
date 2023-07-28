@@ -1,0 +1,144 @@
+*{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:'poppins', sans-serif;
+      }
+
+
+
+
+
+	
+	.heading{
+		background-color: #15317E;
+		color: white;
+    position: fixed;
+    
+	}
+	.heading h1{
+		font-size: 25px;
+		font-weight: bold;
+		padding: 40px;
+
+	}
+	#search{
+		
+		border-radius: 5px;
+		color: black;
+		padding: 10px;
+		width: 80%;
+		margin-bottom: 15px;
+
+	}
+	::placeholder{
+		color: black;
+	}
+.example-search{
+	font-size: 17px;
+
+}
+.heading2{
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	background-color: #15317E;
+		color: white;
+		padding-bottom: 20px;
+		padding-top: 20px;
+    position: fixed;
+
+}
+.heading3{
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	background-color: #15317E;
+		color: white;
+		padding-bottom: 20px;
+		padding-top: 0px;
+    position: fixed;
+
+}
+.upload-me{
+	padding: 5px;
+	border-radius: 5px;
+}
+
+
+/* ROW YA CATEGORY */
+
+ .card{
+      width: 100%;
+     box-shadow: -10px 10px 10px rgba(0,0,0,0.3);
+      transition-property: all;
+      transition-duration: 1s;
+      transition-delay: .5s;
+      transition-timing-function: ease-in;
+    }
+
+   .category-section{
+   	justify-content: center;
+	align-content: center;
+	align-items: center;
+	
+
+   }
+   .column{
+   	margin-top: 10px;
+   	background-color: white;
+   }
+
+
+
+
+
+
+/* PAGE 02  */
+   .Microcontrollers{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    border: 0px;
+    padding: 15px;
+     box-shadow: -10px 10px  10px rgba(0,0,0,0.3);
+   }
+   .link{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    border: 0px;
+    padding: 5px;
+     
+   }
+   .column-link{
+   	
+   	margin-bottom: 15px;
+   }
+   table, tr, th{
+   	font-size: 15px;
+   	color: black;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   /* VIEW PAGE STYLES             */
+
+
+   .view-page1{
+   	justify-content: center;
+	align-content: center;
+	align-items: center;
+
+   }

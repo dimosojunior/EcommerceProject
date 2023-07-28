@@ -1,0 +1,265 @@
+{% extends 'MyApp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+ 
+</head>
+<body>
+
+
+
+  <style>
+
+   
+    .small-img{
+      width: 70px;
+      height: 70px;
+    }
+  </style>
+  <main class="mt-5 pt-4" >
+    <div class="container-fluid">
+      {% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+
+
+
+
+
+
+<!------------------view details page----------------------------------------->
+
+
+ 
+  <div class="row view-page1" style="margin-top: 50px;box-shadow: -10px 10px  10px rgba(0,0,0,0.3)"><!---mwanzo wa row----->
+  <center> 
+<h1 style="color: blue;font-weight: bold;font-size: 25px;">D-Trader</h1></center>
+      <div class="col-md-2"><!---mwanzo wa column----->
+     <img src="{% static 'MyApp/assets/img/me.jpg' %}" class="rounded-circle" style="width: 80px;height: 80px;">     
+      </div><!---mwisho wa column----->
+
+
+   <div class="col-md-8" style="margin-top: 15px;"><!---mwanzo wa column----->   
+      
+
+    <p style="float: left;text-align: left;">
+      To get your products to your buyer easily and conveniently, we have prepared all shipping methods for you. Not only can you set your own, such as a price for collection. You can also easily create other shipping methods linked to different zones.
+
+       
+
+      <!-- <button class="btn-primary upload-me" style="margin-top:10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 20px;margin-right: 5px;background-color: ;"></i> </button>   -->
+      </p>
+
+
+
+</div><!---mwisho wa column----->
+
+  
+    
+  </div><!---mwisho wa row------------------------------------>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <section class="mb-4" style="box-shadow: -10px 10px  10px rgba(0,0,0,0.3)">
+        {% if order.items.all %}
+  
+        <h1 style="font-size: 22px;margin-top: 20px;font-weight: bold;">Order summary</h1>
+        <div class="table-responsive text-nowrap">
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Item Price</th>
+                <th scope="col">action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order_item in order.items.all %}
+                <tr>
+                <th scope="row">
+                  <img src="{{order_item.item.image.url}}" class="rounded small-img" alt="">
+                </th>
+                <td>{{order_item.item.ProductName}}</td>
+                <td>
+                  <a href="{{order_item.item.get_remove_single_from_cart_url}}">
+                    <i class='fa fa-minus icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 17px;margin-right: 5px;background-color: ;"></i>
+                  </a>
+                  {{order_item.quantity}}
+                   <a href="{{order_item.item.get_add_to_cart_url2}}">
+                   <i class='fa fa-plus icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: blue;font-size: 17px;margin-left: 5px;background-color: ;"></i>
+                  </a>
+                </td>
+                {% if order_item.item.ProductDiscountPrice %}
+                  <td>{{order_item.item.ProductDiscountPrice}}</td>
+                {% else %}
+                  <td>{{order_item.item.ProductPrice}}</td>
+                {% endif %}
+
+                
+                <td>{{order_item.get_final_price}}
+                  {% if order_item.item.discount_price %}
+                    <span class="badge badge-pill badge-info">{{order_item.get_amount_saved}}</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="{{order_item.item.get_remove_from_cart_url2}}">
+                    <span style="color: red;" class="float-right">
+                      <button class="btn btn-outline-primary float-right">Remove</button>
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="5">
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary float-right">Continue Shopping</a>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+             
+                <tr>
+                  <td colspan="4">
+                    <h4 style="font-size: 20px;">Order total</h4>
+                  </td>
+                  <td colspan="1" style="font-weight: bold;">
+                    Tsh. {{order.get_total}}/=
+                  </td>
+                </tr>
+              <!--   <tr>
+                  <td colspan="5">
+
+
+                    <a href="" class="btn btn-outline-warning float-right ml-2" style="color: red;font-weight: bold;">Send Email To Me</a>
+
+
+
+                    <a href="" class="btn btn-outline-warning float-right ml-2" style="color: red;font-weight: bold;">Prodeed to checkout</a>
+
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary float-right">Continue Shopping</a>
+                  </td>
+                </tr> -->
+              
+  
+            </tbody>
+          </table>
+          {% else %}
+  
+          <h4 class="mt-5 pt-4">No items in your cart</h4>
+          <a href="{% url 'home' %}" class="btn btn-outline-primary" style="color: red;">Continue Shopping</a>
+          {% endif %}
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<center>
+<div class="row">
+
+<div class="col-md-8" style="float: left;text-align: left;"><!--mwanzo wa column--->
+
+  
+
+     
+  </p>
+
+
+<div style="display: flex;">
+  <a href="{% url 'checkout' %}">
+     <button class="btn-primary upload-me" style="margin-top:10px;margin-right: 10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 20px;margin-right: 5px;background-color: ;"></i>Checkout</button></a>  
+
+<a href="{% url 'home' %}">
+        <button class="btn-danger upload-me" style="margin-top:10px;margin-right: 10px;"><i class='fa fa-eye icon'  style="color: white;font-size: 20px;margin-right:5px;background-color: ;"></i> Continue Shopping</button> </a>
+  
+  
+  <a href="{% url 'contact_me' %}">
+        <button class="btn-success upload-me" style="margin-top:10px;margin-right: 10px;margin-bottom: 2cm;"><i class='fa fa-book icon'  style="color: white;font-size: 20px;margin-right:5px;background-color: ;"></i>Email Me</button> </a>         
+</div>
+
+  
+</div><!--mwisho wa column--->
+
+
+
+</div><!--MWISHO wa row--->
+
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,238 @@
+{% load static %}
+{% load MyApp %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+
+         <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'MyApp/assets/jqueryui/jquery-ui.theme.css' %}">
+
+
+<style type="text/css">
+
+  input{
+            width: 90%;
+            padding: 10px;
+            font-size: 17px;
+            color: black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-top-right-radius: 0px;
+          }
+          ::placeholder{
+            color: black;
+            font-weight: bold;
+          }
+</style>
+</head>
+    <body style="background-color: ;margin-top: 1cm;">
+
+
+
+
+
+
+
+<div class="container-fluid" style="background-color: white; color: black;font-family: sans-serif;padding: 10px;margin-top: 30px;"><!---mwanzo wa div---->
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row" style="margin-bottom: 20px;margin-top: 1cm;"><!---mwanzo wa row---->
+  {% if request.user|cart_item_count != 0 %}
+<center>
+  <a href="{% url 'order_summary' %}">
+  <button style="background-color: white;color: black;border-radius: 10px;padding: 20px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;"><i class='fa fa-bell icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> {{ request.user|cart_item_count}} Items in your cart</button></a>
+</center>
+{% else %}
+<center>
+  <button style="background-color: white;color: black;border-radius: 10px;padding: 20px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;"><i class='fa fa-home icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> Your Cart is empty</button>
+</center>
+
+{% endif %}
+
+</div><!---mwisho wa row---->
+
+
+
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+
+  <form method="get" action="{% url 'search_products_everywhere' %}">
+    {% csrf_token %}
+
+
+    <input type="text" name="search" id="search" placeholder="Enter Product Name" required><br>
+    <div class="col-md-3"><!---mwanzo wa column---->
+
+
+
+    <input type="submit" class="btn-primary" value="Search Product" name="" style="">
+    </div><!---mwisho wa column---->
+  </form>
+
+
+</div><!---mwisho wa row---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<div class="col-md-6">
+  <a href="{% url 'home' %}">
+  <button style="background-color: white;color: black;border-radius: 10px;padding: 20px;font-weight: bold;border: 0px;box-shadow: -5px 10px  10px rgba(0,0,0,0.3);font-size: 18px;"><i class='fa fa-home icon' data-bs-toggle="modal" data-bs-target="#chat" style="color: red;font-size: 20px;margin-right: 5px;background-color: ;"></i> Continue Shopping</button></a>
+</div>
+
+
+
+</div><!---mwisho wa row---->
+
+
+
+
+
+
+
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<span style="font-size: 18px;font-weight: bold;">Follow Us</span><br>
+ <div class="socials">
+
+    <a href="https://www.facebook.com/dimosoel.junior/"><i class="bx bxl-facebook" style="color: blue;background-color: white;"></i></a>
+
+    <a href="https://www.instagram.com/Iamdimosoeljunior/"><i class="bx bxl-instagram" style="color: red;background-color: white;"></i></a>
+
+    <a href="https://api.whatsapp.com/send?phone=+255628431507text=welcome%20to%20my%20whatsapp/"><i class="bx bxl-whatsapp" style="color: green;background-color: white;"></i></a>
+
+    <a href="https://twitter.com/DimosoJunior?t=GRmIOtib-__S7GyTTepLiQ&s=09/"><i class="bx bxl-twitter" style="color: blue;background-color: white;"></i></a>
+
+    <a href="https://youtube.com/channel/UC2CJIUhpgkifZwk4Ct-9JUw/"><i class="bx bxl-youtube" style="color: red;background-color: white;"></i></a>
+
+  </div>
+
+</div><!---mwisho wa row---->
+
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<span style="font-size: 18px;font-weight: bold;">Great Value</span><br>
+<p>We see our customers as invited guests to a party, and we are the hosts. It's our job every day to make every important aspect of the customer experience a little bit better.</p>
+
+</div><!---mwisho wa row---->
+
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<span style="font-size: 18px;font-weight: bold;">Everywhere in Tanzania</span><br>
+<p>With sites in 24 hours, we ship to over whole regions & Country.</p>
+
+</div><!---mwisho wa row---->
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<span style="font-size: 18px;font-weight: bold;">Safe Payment</span><br>
+<p>Pay only after delivery and inspection.</p>
+
+</div><!---mwisho wa row---->
+
+
+
+<div class="row" style="margin-bottom: 20px;"><!---mwanzo wa row---->
+
+<span style="font-size: 18px;font-weight: bold;">Shop with Confidence</span><br>
+<p>Our Buyer Protection covers your purchases from click to delivery.</p>
+
+</div><!---mwisho wa row---->
+
+
+
+</div><!---mwisho wa div---->
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'MyApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'MyApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+   <script >
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskel",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+
+
+    ];
+
+   $( "#search" ). autocomplete({
+    source: "{% url 'search_product_autocomplete' %}",
+  });
+
+
+  } );
+
+
+
+</script>
+ </body>
+</html>
